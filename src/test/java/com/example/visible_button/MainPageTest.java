@@ -24,7 +24,7 @@ public class MainPageTest {
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
 
     }
 
@@ -37,8 +37,8 @@ public class MainPageTest {
     public void visible() {
         driver.get("https://demoqa.com/dynamic-properties");
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(6));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#visibleAfter")));
         WebElement hideButton = driver.findElement(By.cssSelector("#visibleAfter"));
-        wait.until(ExpectedConditions.visibilityOf(hideButton));
         assertTrue(hideButton.isEnabled(), "Кнопка не стала видимой");
     }
 }
